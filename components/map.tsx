@@ -48,6 +48,7 @@ const Map = () => {
     libraries: newLibraries,
   });
 
+  /* Google map styling */
   const mapContainerStyle = {
     width: "100vw",
     height: "100vh",
