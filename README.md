@@ -12,9 +12,8 @@ This project is broken down into different branches for each feature to make it 
 
 - `main` - The main branch contains the final code for the project.
 - `setup` - The setup branch contains the code for setting up the project.
-- `google-maps-api` - The google-maps-api branch contains the code for creating a Google Maps API context.
-- `ui-components` - The ui-components branch contains the code for creating UI components.
 - `map-component` - The map-component branch contains the code for creating the map component.
+- `ui-components` - The ui-components branch contains the code for creating UI components.
 - `map-features/add-markers` - The map-features branch contains the code for adding features to the map component.
 - `map-features/custom-markers` - The map-features branch contains the code for adding features to the map component.
 - `map-features/custom-overlay` - The map-features branch contains the code for adding features to the map component.

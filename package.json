@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.18.1",
     "flowbite": "^1.6.3",
     "flowbite-react": "^0.3.8",
     "next": "latest",
