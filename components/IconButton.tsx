@@ -16,7 +16,7 @@ const IconButton = ({ onClick, children }: IconButtonProps) => {
       className="w-12 h-12 lg:w-14 lg:h-14 bg-white text-purple-default rounded-2xl hover:bg-purple-default hover:text-white focus:outline-none"
       onClick={onClick}
     >
-      <div className="flex justify-center items-center h-full text-purple-default">
+      <div className="flex justify-center items-center w-full h-full">
         {children}
       </div>
     </div>
