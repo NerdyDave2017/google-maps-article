@@ -16,17 +16,21 @@ const Layout = () => {
     <div className="relative w-full h-full ">
       {/* User location and side bar */}
       <div className="flex-col justify-center items-center space-y-2 md:space-y-4 absolute z-50 top-10 right-5 md:right-20">
-        <IconButton>
+        <IconButton shadow={true}>
           <MyLocationIcon className="w-6 h-6 lg:w-7 lg:h-7" />
         </IconButton>
-        <IconButton>
+        <IconButton shadow={true}>
           <SearchIcon className="w-6 h-6 lg:w-7 lg:h-7" />
         </IconButton>
       </div>
       {/* Bottom Nav */}
       <div
         className="flex w-auto rounded-2xl bg-white absolute z-50 bottom-20"
-        style={{ left: "50%", transform: "translateX(-50%)" }}
+        style={{
+          left: "50%",
+          transform: "translateX(-50%)",
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
+        }}
       >
         <IconButton>
           <AddLocationAltIcon className="w-6 h-6 lg:w-7 lg:h-7" />
