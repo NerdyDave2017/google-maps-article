@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
-
-import Map from "../components/map";
+import Layout from "../components/Layout";
 
 const Home: NextPage = () => {
   return (
     <>
-      <Map />
+      <Layout />
     </>
   );
 };
