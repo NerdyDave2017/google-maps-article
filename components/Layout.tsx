@@ -7,21 +7,22 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
-
+// import components
 import Map from "./map";
 import IconButton from "./IconButton";
+import UserGeoLoacation from "./UserGeolocation/Index";
+import Search from "./Search/Index";
+import AddMarker from "./AddMarker/Index";
+import Overlay from "./Overlay/Index";
+import TwoPoints from "./TwoPoints/Index";
 
 const Layout = () => {
   return (
     <div className="relative w-full h-full ">
       {/* User location and side bar */}
-      <div className="flex-col justify-center items-center space-y-2 md:space-y-4 absolute z-50 top-10 right-5 md:right-20">
-        <IconButton shadow={true}>
-          <MyLocationIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-        </IconButton>
-        <IconButton shadow={true}>
-          <SearchIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-        </IconButton>
+      <div className="w-11/12 md:w-auto flex-col justify-center items-center space-y-2 md:space-y-4 space-x-0 absolute z-50 top-10 right-5 md:right-20">
+        <UserGeoLoacation />
+        <Search />
       </div>
       {/* Bottom Nav */}
       <div
@@ -32,15 +33,9 @@ const Layout = () => {
           boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
         }}
       >
-        <IconButton>
-          <AddLocationAltIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-        </IconButton>
-        <IconButton>
-          <LocalOfferIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-        </IconButton>
-        <IconButton>
-          <TransferWithinAStationIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-        </IconButton>
+        <AddMarker />
+        <Overlay />
+        <TwoPoints />
         <IconButton>
           <ZoomInIcon className="w-6 h-6 lg:w-7 lg:h-7" />
         </IconButton>
