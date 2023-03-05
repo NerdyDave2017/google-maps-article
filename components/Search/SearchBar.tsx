@@ -13,7 +13,7 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Enter your location..."
-        className="box-border w-full h-full  outline-none outline-0 focus:outline-none focus:outline-0   border-none border-0 focus:border-transparent bg-transparent text-white  placeholder:text-white"
+        className="box-border w-full h-full  outline-none outline-0 focus:outline-none focus:outline-0 ring-0 focus:ring-0  border-none border-0 focus:border-transparent bg-transparent text-white  placeholder:text-white"
         style={{
           borderTopLeftRadius: "1rem",
           borderBottomLeftRadius: "1rem",
