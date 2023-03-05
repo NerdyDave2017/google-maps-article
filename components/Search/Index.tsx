@@ -9,7 +9,13 @@ const Index = () => {
   return (
     <div className="flex flex-1">
       <SearchBar />
-      <IconButton shadow={true}>
+      <IconButton
+        shadow={true}
+        style={{
+          borderTopLeftRadius: "0rem",
+          borderBottomLeftRadius: "0rem",
+        }}
+      >
         <SearchIcon className="w-6 h-6 lg:w-7 lg:h-7" />
       </IconButton>
     </div>
