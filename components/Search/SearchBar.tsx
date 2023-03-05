@@ -1,13 +1,21 @@
 import React from "react";
 
-const SearchBar = () => {
+type SearchBarProps = {
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  style?: React.CSSProperties;
+};
+
+const SearchBar = ({ value, onChange, style }: SearchBarProps) => {
   return (
     <div
-      className="h-12 lg:h-14 w-80 bg-purple-light  flex-1"
+      className="w-full h-12 lg:h-14 bg-purple-light"
       style={{
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
         borderTopLeftRadius: "1rem",
         borderBottomLeftRadius: "1rem",
+        transition: "all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        ...style,
       }}
     >
       <input
@@ -18,6 +26,8 @@ const SearchBar = () => {
           borderTopLeftRadius: "1rem",
           borderBottomLeftRadius: "1rem",
         }}
+        onChange={onChange}
+        value={value}
       />
     </div>
   );
