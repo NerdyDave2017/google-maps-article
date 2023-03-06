@@ -20,7 +20,6 @@ const Index = () => {
     <div className="flex-col space-y-1 flex-1">
       <div className="flex justify-end">
         {/* Conditional Rendering onClick search IconButton */}
-        {/* {visible && ( */}
         <SearchBar
           style={{
             width: visible ? "24rem" : "0rem",
@@ -28,7 +27,6 @@ const Index = () => {
           onChange={(e) => setSearch(e.target.value)}
           value={search}
         />
-        {/* )} */}
         {/* IconButton visible - opens and closes search bar and card onClick */}
         <IconButton
           shadow={true}
