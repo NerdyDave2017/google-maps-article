@@ -1,7 +1,12 @@
 import React from "react";
+import { Spinner } from "flowbite-react";
 
-const Spinner = () => {
-  return <div>Spinner</div>;
+type SpinnerProps = {
+  className?: string;
 };
 
-export default Spinner;
+const Index = ({ className }: SpinnerProps) => {
+  return <Spinner className={className} />;
+};
+
+export default Index;

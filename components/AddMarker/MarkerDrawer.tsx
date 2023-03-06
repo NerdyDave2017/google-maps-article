@@ -8,6 +8,10 @@ import LocalTaxiIcon from "@mui/icons-material/LocalTaxi";
 // import CommuteIcon from "@mui/icons-material/Commute";
 // import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
 
+type MarkerDrawerProps = {
+  style?: React.CSSProperties;
+};
+
 const MarkerDrawer = () => {
   return (
     <div className="flex-col space-y-2 absolute bottom-16">
