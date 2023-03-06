@@ -20,7 +20,7 @@ const Layout = () => {
   return (
     <div className="relative w-full h-full ">
       {/* User location and side bar */}
-      <div className="w-11/12 md:w-auto flex-col justify-center items-center space-y-2 md:space-y-4 space-x-0 absolute z-50 top-10 right-5 md:right-20">
+      <div className="w-auto md:w-auto flex-col justify-center items-center space-y-2 md:space-y-4 space-x-0 absolute z-50 top-10 right-5 left-5 md:left-auto md:right-20">
         <UserGeoLoacation />
         <Search />
       </div>
