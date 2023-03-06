@@ -1,6 +1,14 @@
 /*eslint-disable*/
 import { useLoadScript, GoogleMap } from "@react-google-maps/api";
-import React, { useMemo, useRef, useCallback } from "react";
+import React, {
+  useMemo,
+  useRef,
+  useCallback,
+  useContext,
+  useEffect,
+} from "react";
+
+import GlobalVariableContext from "../context/GlobalVaribales";
 
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
@@ -12,6 +20,8 @@ type Libraries = (
   | "places"
   | "visualization"
 )[];
+
+import Spinner from "./Spinner";
 
 const Map = () => {
   /* Creating a reference to the map. */
@@ -54,8 +64,16 @@ const Map = () => {
     height: "100vh",
   };
 
-  /* Checking if the map is loaded. If it is not loaded, it will display a loading message. */
-  if (!isLoaded) return <div>Loading ...</div>;
+  if (!isLoaded) {
+    return (
+      <div
+        style={mapContainerStyle}
+        className="flex justify-center items-center bg-white"
+      >
+        <Spinner style={{ width: "3rem", height: "3rem" }} />
+      </div>
+    );
+  }
 
   return (
     /* Creating a Google Map. */

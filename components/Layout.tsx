@@ -1,10 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 // import icons
-import MyLocationIcon from "@mui/icons-material/MyLocation";
-import SearchIcon from "@mui/icons-material/Search";
-import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 // import components
@@ -15,8 +10,13 @@ import Search from "./Search/Index";
 import AddMarker from "./AddMarker/Index";
 import Overlay from "./Overlay/Index";
 import TwoPoints from "./TwoPoints/Index";
+import Spinner from "./Spinner";
+
+// import context
+import GlobalVariableContext from "../context/GlobalVaribales";
 
 const Layout = () => {
+  // Conditionally render the map
   return (
     <div className="relative w-full h-full ">
       {/* User location and side bar */}
