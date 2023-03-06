@@ -8,6 +8,8 @@ import React, {
   useEffect,
 } from "react";
 
+import Marker from "./Marker";
+
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
 type MapOptions = google.maps.MapOptions;
@@ -83,6 +85,7 @@ const Map = () => {
       onLoad={onLoad}
     >
       {/* Child components, such as markers, info windows, etc. */}
+      <Marker position={{ lat: 53.344250668504806, lng: -6.261668903294844 }} />
     </GoogleMap>
   );
 };
