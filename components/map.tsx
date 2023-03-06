@@ -75,21 +75,6 @@ const Map = () => {
     );
   }
 
-  /* Checking if the map is loaded. If loaded, update global loading state */
-  // if (!isLoaded) {
-  //   updateGlobalVariableState({ loading: true });
-  //   return (
-  //     <div
-  //       style={mapContainerStyle}
-  //       className="flex justify-center items-center bg-white"
-  //     >
-  //       <Spinner style={{ width: "3rem", height: "3rem" }} />
-  //     </div>
-  //   );
-  // }
-
-  // }
-
   return (
     /* Creating a Google Map. */
     <GoogleMap
