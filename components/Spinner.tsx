@@ -6,7 +6,7 @@ type SpinnerProps = {
 };
 
 const Index = ({ className }: SpinnerProps) => {
-  return <Spinner className={className} />;
+  return <Spinner className={"fill-purple-default" + className} />;
 };
 
 export default Index;
