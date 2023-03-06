@@ -8,8 +8,6 @@ import React, {
   useEffect,
 } from "react";
 
-import GlobalVariableContext from "../context/GlobalVaribales";
-
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
 type MapOptions = google.maps.MapOptions;
