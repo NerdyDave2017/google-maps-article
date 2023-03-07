@@ -30,7 +30,7 @@ const MarkerDrawer = ({ closeDrawer }: MarkerDrawerProps) => {
     setAddMarker(true);
 
     // Close marker drawer on click
-    closeDrawer(false);
+    closeDrawer();
   };
 
   return (
