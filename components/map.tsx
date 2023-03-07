@@ -70,6 +70,7 @@ const Map = () => {
     height: "100vh",
   };
 
+  // Function to add default marker
   const handleMapClick = (e: any) => {
     // Check if adding a new marker is enabled
     if (!addMarker) return;
