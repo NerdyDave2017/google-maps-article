@@ -40,6 +40,7 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   // Global Marker state
   const [markers, setMarkers] = useState<Array<IMarker>>([]);
   const [addMarker, setAddMarker] = useState(false);
+  const [markerType, setMarkerType] = useState();
 
   return (
     <GlobalVariableContext.Provider

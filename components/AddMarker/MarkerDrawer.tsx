@@ -14,6 +14,25 @@ type MarkerDrawerProps = {
   closeDrawer: () => void;
 };
 
+const markerData = [
+  {
+    name: "Default",
+    icon: <PlaceIcon className="w-6 h-6 lg:w-7 lg:h-7" />,
+  },
+  {
+    name: "Home",
+    icon: <HomeIcon className="w-6 h-6 lg:w-7 lg:h-7" />,
+  },
+  {
+    name: "Restaurant",
+    icon: <RestaurantIcon className="w-6 h-6 lg:w-7 lg:h-7" />,
+  },
+  {
+    name: "Taxi",
+    icon: <LocalTaxiIcon className="w-6 h-6 lg:w-7 lg:h-7" />,
+  },
+];
+
 const MarkerDrawer = ({ closeDrawer }: MarkerDrawerProps) => {
   /* Destructuring the `setBannerMessage` and `setShowBanner` from the `GlobalVariableContext` */
   const { setBannerMessage, setShowBanner, setAddMarker } = useContext(
@@ -21,32 +40,25 @@ const MarkerDrawer = ({ closeDrawer }: MarkerDrawerProps) => {
   );
 
   // Function to add marker
-  const addDefaultMarker = () => {
+  const addMarker = (markerType: string) => {
     // Show banner
     setShowBanner(true);
     // Add custom banner message
     setBannerMessage("Double click map to add marker");
     // set add marker value to true to allow adding new marker
     setAddMarker(true);
-
+    // set marker type
     // Close marker drawer on click
     closeDrawer();
   };
 
   return (
     <div className="flex-col space-y-2 absolute bottom-16">
-      <IconButton onClick={addDefaultMarker}>
-        <PlaceIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-      </IconButton>
-      <IconButton>
-        <HomeIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-      </IconButton>
-      <IconButton>
-        <RestaurantIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-      </IconButton>
-      <IconButton>
-        <LocalTaxiIcon className="w-6 h-6 lg:w-7 lg:h-7" />
-      </IconButton>
+      {markerData.map((marker) => (
+        <IconButton onClick={() => addMarker(marker.name)}>
+          {marker.icon}
+        </IconButton>
+      ))}
     </div>
   );
 };
