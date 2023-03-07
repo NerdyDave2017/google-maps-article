@@ -2,14 +2,14 @@ import { createContext, useState, ReactNode } from "react";
 
 // Interface for the global variable context
 interface GlobalVariableContext {
-  globalVariable: IGlobalVariableState;
-  updateGlobalVariableState: (value: any) => void;
-  resetGlobalVariableState: () => void;
-}
-// Interface for the global variable state
-interface IGlobalVariableState {
   loading: boolean;
+  setLoading: (loading: boolean) => void;
+  showBanner: boolean;
+  setShowBanner: (showBanner: boolean) => void;
+  bannerMessage: string;
+  setBannerMessage: (bannerMessage: string) => void;
 }
+
 // Type for the global variable provider
 type GlobalVariableProp = {
   children: ReactNode;
@@ -20,34 +20,21 @@ const GlobalVariableContext = createContext<GlobalVariableContext>(
 );
 
 export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
-  // Global variable state
-  const defaultGlobalVariableState = {
-    loading: false,
-  };
-
-  const [globalVariable, setGlobalVariable] = useState<IGlobalVariableState>({
-    // Add global variables here
-    loading: false,
-  });
-
-  // Function to update the global variable state
-  const updateGlobalVariableState = (value: IGlobalVariableState) => {
-    setGlobalVariable({
-      ...globalVariable,
-      ...value,
-    });
-  };
-
-  const resetGlobalVariableState = () => {
-    setGlobalVariable(defaultGlobalVariableState);
-  };
+  // Global loading state
+  const [loading, setLoading] = useState(false);
+  // Global Banner state
+  const [showBanner, setShowBanner] = useState(false);
+  const [bannerMessage, setBannerMessage] = useState("");
 
   return (
     <GlobalVariableContext.Provider
       value={{
-        globalVariable,
-        updateGlobalVariableState,
-        resetGlobalVariableState,
+        loading,
+        setLoading,
+        showBanner,
+        setShowBanner,
+        bannerMessage,
+        setBannerMessage,
       }}
     >
       {children}
