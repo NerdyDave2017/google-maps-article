@@ -8,12 +8,23 @@ interface GlobalVariableContext {
   setShowBanner: (showBanner: boolean) => void;
   bannerMessage: string;
   setBannerMessage: (bannerMessage: string) => void;
+  markers: Array<IMarker>;
+  setMarkers: (markers: Array<IMarker>) => void;
+  addMarker: boolean;
+  setAddMarker: (addMarker: boolean) => void;
 }
 
 // Type for the global variable provider
 type GlobalVariableProp = {
   children: ReactNode;
 };
+
+/* This is the interface for the marker object. */
+export interface IMarker {
+  position: google.maps.LatLngLiteral;
+  markerType?: string;
+  description?: string;
+}
 
 const GlobalVariableContext = createContext<GlobalVariableContext>(
   {} as GlobalVariableContext
@@ -26,6 +37,10 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   const [showBanner, setShowBanner] = useState(false);
   const [bannerMessage, setBannerMessage] = useState("");
 
+  // Global Marker state
+  const [markers, setMarkers] = useState<Array<IMarker>>([]);
+  const [addMarker, setAddMarker] = useState(false);
+
   return (
     <GlobalVariableContext.Provider
       value={{
@@ -35,6 +50,10 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setShowBanner,
         bannerMessage,
         setBannerMessage,
+        markers,
+        setMarkers,
+        addMarker,
+        setAddMarker,
       }}
     >
       {children}

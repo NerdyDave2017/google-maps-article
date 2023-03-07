@@ -16,12 +16,18 @@ type MarkerDrawerProps = {
 
 const MarkerDrawer = () => {
   /* Destructuring the `setBannerMessage` and `setShowBanner` from the `GlobalVariableContext` */
-  const { setBannerMessage, setShowBanner } = useContext(GlobalVariableContext);
+  const { setBannerMessage, setShowBanner, setAddMarker } = useContext(
+    GlobalVariableContext
+  );
 
   // Function to add marker
   const addDefaultMarker = () => {
+    // Show banner
     setShowBanner(true);
+    // Add custom banner message
     setBannerMessage("Double click map to add marker");
+    // set add marker value to true to allow adding new marker
+    setAddMarker(true);
     console.log("addDefaultMarker");
   };
 

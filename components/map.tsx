@@ -8,6 +8,8 @@ import React, {
   useEffect,
 } from "react";
 
+import GlobalVariableContext from "../context/GlobalVaribales";
+
 import Marker from "./Marker";
 
 // Map Types
@@ -24,6 +26,10 @@ type Libraries = (
 import Spinner from "./Spinner";
 
 const Map = () => {
+  // import setMarkers function from global variable context
+  const { markers, setMarkers, addMarker, setAddMarker, setShowBanner } =
+    useContext(GlobalVariableContext);
+
   /* Creating a reference to the map. */
   const mapRef = useRef<GoogleMap>();
 
@@ -64,6 +70,29 @@ const Map = () => {
     height: "100vh",
   };
 
+  const handleMapClick = (e: any) => {
+    // Check if adding a new marker is enabled
+    if (!addMarker) return;
+
+    // let clicked point location value
+    const latLng: any = e.latLng;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+
+    // Object to create new marker
+    const newMarker = {
+      position: { lat, lng },
+    };
+
+    // update global marker state with new variable
+    setMarkers([...markers, newMarker]);
+
+    // Close Banner prompt
+    setShowBanner(false);
+    // update add marker to prevent adding new marker
+    setAddMarker(false);
+  };
+
   if (!isLoaded) {
     return (
       <div
@@ -83,9 +112,12 @@ const Map = () => {
       mapContainerStyle={mapContainerStyle}
       options={options}
       onLoad={onLoad}
+      onDblClick={handleMapClick}
     >
       {/* Child components, such as markers, info windows, etc. */}
-      <Marker position={{ lat: 53.344250668504806, lng: -6.261668903294844 }} />
+      {markers?.map((marker, index) => (
+        <Marker position={marker.position} key={index} />
+      ))}
     </GoogleMap>
   );
 };
