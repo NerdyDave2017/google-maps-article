@@ -12,6 +12,8 @@ interface GlobalVariableContext {
   setMarkers: (markers: Array<IMarker>) => void;
   addMarker: boolean;
   setAddMarker: (addMarker: boolean) => void;
+  markerType: IMarkerType;
+  setMarkerType: (markerType: IMarkerType) => void;
 }
 
 // Type for the global variable provider
@@ -25,6 +27,8 @@ export interface IMarker {
   markerType?: string;
   description?: string;
 }
+
+type IMarkerType = "Default" | "Home" | "Restaurant" | "Taxi";
 
 const GlobalVariableContext = createContext<GlobalVariableContext>(
   {} as GlobalVariableContext
@@ -40,7 +44,7 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   // Global Marker state
   const [markers, setMarkers] = useState<Array<IMarker>>([]);
   const [addMarker, setAddMarker] = useState(false);
-  const [markerType, setMarkerType] = useState();
+  const [markerType, setMarkerType] = useState<IMarkerType>("Default");
 
   return (
     <GlobalVariableContext.Provider
@@ -55,6 +59,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setMarkers,
         addMarker,
         setAddMarker,
+        markerType,
+        setMarkerType,
       }}
     >
       {children}
