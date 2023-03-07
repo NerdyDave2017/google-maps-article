@@ -11,18 +11,26 @@ import LocalTaxiIcon from "@mui/icons-material/LocalTaxi";
 // import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
 
 type MarkerDrawerProps = {
-  style?: React.CSSProperties;
+  closeDrawer: () => void;
 };
 
-const MarkerDrawer = () => {
+const MarkerDrawer = ({ closeDrawer }: MarkerDrawerProps) => {
   /* Destructuring the `setBannerMessage` and `setShowBanner` from the `GlobalVariableContext` */
-  const { setBannerMessage, setShowBanner } = useContext(GlobalVariableContext);
+  const { setBannerMessage, setShowBanner, setAddMarker } = useContext(
+    GlobalVariableContext
+  );
 
   // Function to add marker
   const addDefaultMarker = () => {
+    // Show banner
     setShowBanner(true);
+    // Add custom banner message
     setBannerMessage("Double click map to add marker");
-    console.log("addDefaultMarker");
+    // set add marker value to true to allow adding new marker
+    setAddMarker(true);
+
+    // Close marker drawer on click
+    closeDrawer();
   };
 
   return (
