@@ -28,7 +28,7 @@ export interface IMarker {
   description?: string;
 }
 
-type IMarkerType = "Default" | "Home" | "Restaurant" | "Taxi";
+export type IMarkerType = "Default" | "Home" | "Restaurant" | "Taxi";
 
 const GlobalVariableContext = createContext<GlobalVariableContext>(
   {} as GlobalVariableContext
