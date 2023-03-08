@@ -9,8 +9,6 @@ import PlaceIcon from "@mui/icons-material/Place";
 import HomeIcon from "@mui/icons-material/Home";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import LocalTaxiIcon from "@mui/icons-material/LocalTaxi";
-// import CommuteIcon from "@mui/icons-material/Commute";
-// import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
 
 /**
  * `MarkerDrawerProps` is an object with a single property, `closeDrawer`, which is a function that
