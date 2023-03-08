@@ -24,7 +24,7 @@ type GlobalVariableProp = {
 /* This is the interface for the marker object. */
 export interface IMarker {
   position: google.maps.LatLngLiteral;
-  markerType?: string;
+  markerType: IMarkerType;
   description?: string;
 }
 

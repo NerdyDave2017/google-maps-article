@@ -74,7 +74,7 @@ const MarkerDrawer = ({ closeDrawer }: MarkerDrawerProps) => {
 
   return (
     <div className="flex-col space-y-2 absolute bottom-16">
-      {markerData.map((marker) => (
+      {markerData.map((marker: IMarkerData) => (
         <IconButton onClick={() => addMarker(marker.name)}>
           {marker.icon}
         </IconButton>
