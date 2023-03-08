@@ -26,6 +26,7 @@ interface IMarkerData {
   icon: JSX.Element;
 }
 
+// Create an array of objects that contain the name of the marker type and the icon that will be rendered
 const markerData: Array<IMarkerData> = [
   {
     name: "Default",

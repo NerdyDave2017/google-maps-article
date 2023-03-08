@@ -14,20 +14,21 @@ interface IMarker {
 
 interface ICustomMarkers {
   Default: string;
-  Home: JSX.Element;
-  Restaurant: JSX.Element;
-  Taxi: JSX.Element;
+  Home: string;
+  Restaurant: string;
+  Taxi: string;
 }
 
 const customMarkersImage: ICustomMarkers = {
   Default: "",
-  Home: <HomeIcon className="w-6 h-6 lg:w-7 lg:h-7" />,
-  Restaurant: <RestaurantIcon className="w-6 h-6 lg:w-7 lg:h-7" />,
-  Taxi: <LocalTaxiIcon className="w-6 h-6 lg:w-7 lg:h-7" />,
+  Home: "https://res.cloudinary.com/nerdydave2017/image/upload/v1678248572/house_1_qu5ps7.svg",
+  Restaurant:
+    "https://res.cloudinary.com/nerdydave2017/image/upload/v1678248572/cutlery_1_lj2x6x.svg",
+  Taxi: "https://res.cloudinary.com/nerdydave2017/image/upload/v1678248572/taxi_1_njngbm.svg",
 };
 
 const marker: FC<IMarker> = ({ position, markerType }) => {
-  return <MarkerF position={position} />;
+  return <MarkerF position={position} icon={customMarkersImage[markerType]} />;
 };
 
 export default marker;
