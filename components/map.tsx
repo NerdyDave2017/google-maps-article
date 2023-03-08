@@ -48,6 +48,7 @@ const Map = () => {
   const options = useMemo<MapOptions>(
     () => ({
       disableDefaultUI: true,
+      minZoom: 3,
       // zoomControl: true,
     }),
     []
@@ -114,7 +115,7 @@ const Map = () => {
   return (
     /* Creating a Google Map. */
     <GoogleMap
-      zoom={10}
+      zoom={12}
       center={center}
       mapContainerStyle={mapContainerStyle}
       options={options}
