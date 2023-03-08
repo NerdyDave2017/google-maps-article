@@ -7,6 +7,7 @@ import React, {
   useContext,
   useEffect,
 } from "react";
+import Spinner from "./Spinner";
 
 import GlobalVariableContext from "../context/GlobalVaribales";
 
@@ -23,12 +24,16 @@ type Libraries = (
   | "visualization"
 )[];
 
-import Spinner from "./Spinner";
-
 const Map = () => {
   // import setMarkers function from global variable context
-  const { markers, setMarkers, addMarker, setAddMarker, setShowBanner } =
-    useContext(GlobalVariableContext);
+  const {
+    markers,
+    setMarkers,
+    addMarker,
+    setAddMarker,
+    setShowBanner,
+    markerType,
+  } = useContext(GlobalVariableContext);
 
   /* Creating a reference to the map. */
   const mapRef = useRef<GoogleMap>();
@@ -70,6 +75,7 @@ const Map = () => {
     height: "100vh",
   };
 
+  // Function to add default marker
   const handleMapClick = (e: any) => {
     // Check if adding a new marker is enabled
     if (!addMarker) return;
@@ -82,6 +88,7 @@ const Map = () => {
     // Object to create new marker
     const newMarker = {
       position: { lat, lng },
+      markerType: markerType,
     };
 
     // update global marker state with new variable
@@ -116,7 +123,11 @@ const Map = () => {
     >
       {/* Child components, such as markers, info windows, etc. */}
       {markers?.map((marker, index) => (
-        <Marker position={marker.position} key={index} />
+        <Marker
+          position={marker.position}
+          key={index}
+          markerType={marker.markerType}
+        />
       ))}
     </GoogleMap>
   );

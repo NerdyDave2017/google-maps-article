@@ -12,6 +12,8 @@ interface GlobalVariableContext {
   setMarkers: (markers: Array<IMarker>) => void;
   addMarker: boolean;
   setAddMarker: (addMarker: boolean) => void;
+  markerType: IMarkerType;
+  setMarkerType: (markerType: IMarkerType) => void;
 }
 
 // Type for the global variable provider
@@ -22,9 +24,11 @@ type GlobalVariableProp = {
 /* This is the interface for the marker object. */
 export interface IMarker {
   position: google.maps.LatLngLiteral;
-  markerType?: string;
+  markerType: IMarkerType;
   description?: string;
 }
+
+export type IMarkerType = "Default" | "Home" | "Restaurant" | "Taxi";
 
 const GlobalVariableContext = createContext<GlobalVariableContext>(
   {} as GlobalVariableContext
@@ -40,6 +44,7 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   // Global Marker state
   const [markers, setMarkers] = useState<Array<IMarker>>([]);
   const [addMarker, setAddMarker] = useState(false);
+  const [markerType, setMarkerType] = useState<IMarkerType>("Default");
 
   return (
     <GlobalVariableContext.Provider
@@ -54,6 +59,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setMarkers,
         addMarker,
         setAddMarker,
+        markerType,
+        setMarkerType,
       }}
     >
       {children}
