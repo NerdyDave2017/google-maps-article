@@ -12,6 +12,7 @@ import Spinner from "./Spinner";
 import GlobalVariableContext from "../context/GlobalVaribales";
 
 import Marker from "./Marker";
+import Infowindow from "./InfoWindow";
 
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
@@ -123,6 +124,7 @@ const Map = () => {
       onDblClick={handleMapClick}
     >
       {/* Child components, such as markers, info windows, etc. */}
+      <Infowindow>Hello world</Infowindow>
       {markers?.map((marker, index) => (
         <Marker
           position={marker.position}
@@ -130,6 +132,8 @@ const Map = () => {
           markerType={marker.markerType}
         />
       ))}
+      <Infowindow>Hello world</Infowindow>
+      <Infowindow>Hello world</Infowindow>
     </GoogleMap>
   );
 };
