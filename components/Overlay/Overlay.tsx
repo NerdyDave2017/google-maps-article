@@ -5,7 +5,11 @@ const Overlay = () => {
   const center = { lat: 53.344250668504806, lng: -6.261668903294844 };
 
   return (
-    <OverlayViewF position={center} mapPaneName={OverlayView.FLOAT_PANE}>
+    <OverlayViewF
+      position={center}
+      mapPaneName={OverlayView.FLOAT_PANE}
+      // getPixelPositionOffset=
+    >
       <div
         className="bg-white w-96 h-32 relative rounded-lg flex"
         style={{

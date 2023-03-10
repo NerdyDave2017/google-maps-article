@@ -14,6 +14,8 @@ interface GlobalVariableContext {
   setAddMarker: (addMarker: boolean) => void;
   markerType: IMarkerType;
   setMarkerType: (markerType: IMarkerType) => void;
+  overlayMarkers: Array<IOverlayMarkers>;
+  setOverlayMarkers: (overlayMarkers: Array<IOverlayMarkers>) => void;
 }
 
 // Type for the global variable provider
@@ -26,6 +28,11 @@ export interface IMarker {
   position: google.maps.LatLngLiteral;
   markerType: IMarkerType;
   description?: string;
+}
+
+/* This is the type for the Overlay marker object. */
+export interface IOverlayMarkers {
+  position: google.maps.LatLngLiteral;
 }
 
 export type IMarkerType = "Default" | "Home" | "Restaurant" | "Taxi";
@@ -46,6 +53,11 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   const [addMarker, setAddMarker] = useState(false);
   const [markerType, setMarkerType] = useState<IMarkerType>("Default");
 
+  // Overlay Marker state
+  const [overlayMarkers, setOverlayMarkers] = useState<Array<IOverlayMarkers>>(
+    []
+  );
+
   return (
     <GlobalVariableContext.Provider
       value={{
@@ -61,6 +73,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setAddMarker,
         markerType,
         setMarkerType,
+        overlayMarkers,
+        setOverlayMarkers,
       }}
     >
       {children}

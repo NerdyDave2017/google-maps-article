@@ -12,7 +12,8 @@ import Spinner from "./Spinner";
 import GlobalVariableContext from "../context/GlobalVaribales";
 
 import Marker from "./Marker";
-import Overlay from "./Overlay";
+import Overlay from "./Overlay/Overlay";
+import OverlayMarker from "./Overlay/OverlayMarker";
 
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
@@ -87,6 +88,8 @@ const Map = () => {
     const lat = latLng.lat();
     const lng = latLng.lng();
 
+    console.log(lat, lng);
+
     // Object to create new marker
     const newMarker = {
       position: { lat, lng },
@@ -131,6 +134,9 @@ const Map = () => {
           markerType={marker.markerType}
         />
       ))}
+      <OverlayMarker
+        position={{ lat: 53.29677471300864, lng: -6.409984332982344 }}
+      />
       <Overlay />
     </GoogleMap>
   );
