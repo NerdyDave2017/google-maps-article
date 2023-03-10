@@ -10,7 +10,12 @@ const Overlay = ({ position }: IOverlay) => {
     <OverlayViewF
       position={position}
       mapPaneName={OverlayView.FLOAT_PANE}
-      // getPixelPositionOffset=
+      getPixelPositionOffset={(width, height) =>
+        ({
+          x: -(width / 2),
+          y: -(height * 1.5),
+        } as google.maps.Point)
+      }
     >
       <div
         className="bg-white w-96 h-32 relative rounded-lg flex"

@@ -97,7 +97,6 @@ const Map = () => {
     const latLng: any = e.latLng;
     const lat = latLng.lat();
     const lng = latLng.lng();
-    console.log(markerType);
     // Check if marker type is overlay
     if (markerType === "Overlay") {
       // Object to create new marker
