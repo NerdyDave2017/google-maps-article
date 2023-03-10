@@ -5,9 +5,8 @@ import IconButton from "../IconButton";
 import GlobalVariableContext from "../../context/GlobalVaribales";
 
 const Index = () => {
-  const { setShowBanner, setBannerMessage, setAddMarker } = useContext(
-    GlobalVariableContext
-  );
+  const { setMarkerType, setShowBanner, setBannerMessage, setAddMarker } =
+    useContext(GlobalVariableContext);
 
   const addOverlayMarker = () => {
     // Show banner
@@ -17,6 +16,8 @@ const Index = () => {
     // set add marker value to true to allow adding new marker
     setAddMarker(true);
     // set marker type
+    setMarkerType("Overlay");
+    // Close marker drawer on click
   };
 
   return (

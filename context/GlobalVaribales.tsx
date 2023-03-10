@@ -35,7 +35,12 @@ export interface IOverlayMarkers {
   position: google.maps.LatLngLiteral;
 }
 
-export type IMarkerType = "Default" | "Home" | "Restaurant" | "Taxi";
+export type IMarkerType =
+  | "Default"
+  | "Home"
+  | "Restaurant"
+  | "Taxi"
+  | "Overlay";
 
 const GlobalVariableContext = createContext<GlobalVariableContext>(
   {} as GlobalVariableContext
