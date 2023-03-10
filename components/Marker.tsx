@@ -12,6 +12,7 @@ interface ICustomMarkers {
   Home: string;
   Restaurant: string;
   Taxi: string;
+  Overlay: string;
 }
 
 const customMarkersImage: ICustomMarkers = {
@@ -20,6 +21,7 @@ const customMarkersImage: ICustomMarkers = {
   Restaurant:
     "https://res.cloudinary.com/nerdydave2017/image/upload/v1678248572/cutlery_1_lj2x6x.svg",
   Taxi: "https://res.cloudinary.com/nerdydave2017/image/upload/v1678466466/taxi_1_dwzsmg.svg",
+  Overlay: "",
 };
 
 const marker: FC<IMarker> = ({ position, markerType }) => {

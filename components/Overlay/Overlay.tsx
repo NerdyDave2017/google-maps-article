@@ -1,12 +1,14 @@
 import React, { useMemo } from "react";
 import { OverlayViewF, OverlayView } from "@react-google-maps/api";
 
-const Overlay = () => {
-  const center = { lat: 53.344250668504806, lng: -6.261668903294844 };
+interface IOverlay {
+  position: google.maps.LatLngLiteral;
+}
 
+const Overlay = ({ position }: IOverlay) => {
   return (
     <OverlayViewF
-      position={center}
+      position={position}
       mapPaneName={OverlayView.FLOAT_PANE}
       // getPixelPositionOffset=
     >

@@ -6,6 +6,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useState,
 } from "react";
 import Spinner from "./Spinner";
 
@@ -27,6 +28,13 @@ type Libraries = (
 )[];
 
 const Map = () => {
+  // Component state to display overlay
+  const [overlayPosition, setOverlayPosition] = useState<LatLngLiteral>({
+    lat: 0,
+    lng: 0,
+  });
+  const [showOverlay, setShowOverlay] = useState(false);
+
   // import setMarkers function from global variable context
   const {
     markers,
@@ -34,6 +42,8 @@ const Map = () => {
     addMarker,
     setAddMarker,
     setShowBanner,
+    overlayMarkers,
+    setOverlayMarkers,
     markerType,
   } = useContext(GlobalVariableContext);
 
@@ -87,8 +97,22 @@ const Map = () => {
     const latLng: any = e.latLng;
     const lat = latLng.lat();
     const lng = latLng.lng();
+    console.log(markerType);
+    // Check if marker type is overlay
+    if (markerType === "Overlay") {
+      // Object to create new marker
+      const newMarker = {
+        position: { lat, lng },
+      };
 
-    console.log(lat, lng);
+      // update global marker state with new variable
+      setOverlayMarkers([...overlayMarkers, newMarker]);
+      // update add marker to prevent adding new marker
+      setAddMarker(false);
+      // Close Banner prompt
+      setShowBanner(false);
+      return;
+    }
 
     // Object to create new marker
     const newMarker = {
@@ -103,6 +127,23 @@ const Map = () => {
     setShowBanner(false);
     // update add marker to prevent adding new marker
     setAddMarker(false);
+  };
+
+  // Function to handle overlay marker click
+  const handleOverlayClick = (position: LatLngLiteral) => {
+    // Check if overlay position is same as clicked position
+    if (
+      overlayPosition.lat === position.lat &&
+      overlayPosition.lng === position.lng
+    ) {
+      // If same, set show overlay to false
+      setShowOverlay(false);
+      // If same, set overlay position to 0,0
+      setOverlayPosition({ lat: 0, lng: 0 });
+      return;
+    }
+    setOverlayPosition(position);
+    setShowOverlay(true);
   };
 
   if (!isLoaded) {
@@ -134,10 +175,17 @@ const Map = () => {
           markerType={marker.markerType}
         />
       ))}
-      <OverlayMarker
-        position={{ lat: 53.29677471300864, lng: -6.409984332982344 }}
-      />
-      <Overlay />
+      {overlayMarkers?.map((marker, index) => (
+        <>
+          <OverlayMarker
+            position={marker.position}
+            key={index}
+            onClick={() => handleOverlayClick(marker.position)}
+          />
+        </>
+      ))}
+      {showOverlay && <Overlay position={overlayPosition} />}
+      {/* <Overlay/> */}
     </GoogleMap>
   );
 };
