@@ -6,12 +6,15 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useState,
 } from "react";
 import Spinner from "./Spinner";
 
 import GlobalVariableContext from "../context/GlobalVaribales";
 
 import Marker from "./Marker";
+import Overlay from "./Overlay/Overlay";
+import OverlayMarker from "./Overlay/OverlayMarker";
 
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
@@ -25,6 +28,13 @@ type Libraries = (
 )[];
 
 const Map = () => {
+  // Component state to display overlay
+  const [overlayPosition, setOverlayPosition] = useState<LatLngLiteral>({
+    lat: 0,
+    lng: 0,
+  });
+  const [showOverlay, setShowOverlay] = useState(false);
+
   // import setMarkers function from global variable context
   const {
     markers,
@@ -32,6 +42,8 @@ const Map = () => {
     addMarker,
     setAddMarker,
     setShowBanner,
+    overlayMarkers,
+    setOverlayMarkers,
     markerType,
   } = useContext(GlobalVariableContext);
 
@@ -48,6 +60,7 @@ const Map = () => {
   const options = useMemo<MapOptions>(
     () => ({
       disableDefaultUI: true,
+      minZoom: 3,
       // zoomControl: true,
     }),
     []
@@ -84,6 +97,21 @@ const Map = () => {
     const latLng: any = e.latLng;
     const lat = latLng.lat();
     const lng = latLng.lng();
+    // Check if marker type is overlay
+    if (markerType === "Overlay") {
+      // Object to create new marker
+      const newMarker = {
+        position: { lat, lng },
+      };
+
+      // update global marker state with new variable
+      setOverlayMarkers([...overlayMarkers, newMarker]);
+      // update add marker to prevent adding new marker
+      setAddMarker(false);
+      // Close Banner prompt
+      setShowBanner(false);
+      return;
+    }
 
     // Object to create new marker
     const newMarker = {
@@ -100,6 +128,23 @@ const Map = () => {
     setAddMarker(false);
   };
 
+  // Function to handle overlay marker click
+  const handleOverlayClick = (position: LatLngLiteral) => {
+    // Check if overlay position is same as clicked position
+    if (
+      overlayPosition.lat === position.lat &&
+      overlayPosition.lng === position.lng
+    ) {
+      // If same, set show overlay to false
+      setShowOverlay(false);
+      // If same, set overlay position to 0,0
+      setOverlayPosition({ lat: 0, lng: 0 });
+      return;
+    }
+    setOverlayPosition(position);
+    setShowOverlay(true);
+  };
+
   if (!isLoaded) {
     return (
       <div
@@ -114,7 +159,7 @@ const Map = () => {
   return (
     /* Creating a Google Map. */
     <GoogleMap
-      zoom={10}
+      zoom={12}
       center={center}
       mapContainerStyle={mapContainerStyle}
       options={options}
@@ -129,6 +174,17 @@ const Map = () => {
           markerType={marker.markerType}
         />
       ))}
+      {overlayMarkers?.map((marker, index) => (
+        <>
+          <OverlayMarker
+            position={marker.position}
+            key={index}
+            onClick={() => handleOverlayClick(marker.position)}
+          />
+        </>
+      ))}
+      {showOverlay && <Overlay position={overlayPosition} />}
+      {/* <Overlay/> */}
     </GoogleMap>
   );
 };
