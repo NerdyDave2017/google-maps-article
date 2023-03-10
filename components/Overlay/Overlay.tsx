@@ -18,7 +18,7 @@ const Overlay = ({ position }: IOverlay) => {
       }
     >
       <div
-        className="bg-white w-96 h-32 relative rounded-lg flex"
+        className="bg-white w-80 h-28 lg:w-96 lg:h-32 relative rounded-lg flex"
         style={{
           boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
         }}
@@ -28,7 +28,7 @@ const Overlay = ({ position }: IOverlay) => {
           alt=""
           className="w-1/3 h-full flex-auto object-cover rounded-l-lg"
         />
-        <div className="w-2/3 flex-auto p-2">
+        <div className="w-2/3 flex-auto p-1 lg:p-2">
           <p className="font-medium text-base">Entire cottage</p>
           <p className="text-sm text-gray-500">
             4 guests · 2 bedrooms · 2 beds
