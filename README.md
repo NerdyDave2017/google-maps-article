@@ -16,7 +16,7 @@ This project is broken down into different branches for each feature to make it 
 - `ui-components` - The ui-components branch contains the code for creating UI components.
 - `map-features/add-markers` - The map-features branch contains the code for adding features to the map component.
 - `map-features/custom-markers` - The map-features branch contains the code for adding features to the map component.
-- `map-features/info-window` - The map-features branch contains the code for adding features to the map component.
+- `map-features/custom-overlay` - The map-features branch contains the code for adding features to the map component.
 - `map-features/distance` - The map-features branch contains the code for adding features to the map component.
 - `map-features/geolocation` - The map-features branch contains the code for adding features to the map component.
 - `map-features/location-search` - The map-features branch contains the code for adding features to the map component.
