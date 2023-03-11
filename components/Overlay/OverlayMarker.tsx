@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { FC } from "react";
 import { Marker as MarkerF } from "@react-google-maps/api";
 
 interface IMarker {
