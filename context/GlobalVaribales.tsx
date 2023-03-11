@@ -16,6 +16,8 @@ interface GlobalVariableContext {
   setMarkerType: (markerType: IMarkerType) => void;
   overlayMarkers: Array<IOverlayMarkers>;
   setOverlayMarkers: (overlayMarkers: Array<IOverlayMarkers>) => void;
+  userLocation: google.maps.LatLngLiteral;
+  setUserLocation: (userLocation: google.maps.LatLngLiteral) => void;
 }
 
 // Type for the global variable provider
@@ -63,6 +65,12 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
     []
   );
 
+  // User Location state
+  const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral>({
+    lat: 0,
+    lng: 0,
+  });
+
   return (
     <GlobalVariableContext.Provider
       value={{
@@ -80,6 +88,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setMarkerType,
         overlayMarkers,
         setOverlayMarkers,
+        userLocation,
+        setUserLocation,
       }}
     >
       {children}

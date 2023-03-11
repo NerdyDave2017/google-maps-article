@@ -45,16 +45,14 @@ const Map = () => {
     overlayMarkers,
     setOverlayMarkers,
     markerType,
+    userLocation,
   } = useContext(GlobalVariableContext);
 
   /* Creating a reference to the map. */
   const mapRef = useRef<GoogleMap>();
 
   /* Hardcoded map center value. useMemo hook to memorize center values */
-  const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 53.344250668504806, lng: -6.261668903294844 }),
-    []
-  );
+  const center = useMemo<LatLngLiteral>(() => userLocation, []);
 
   /* A React hook that is used to memoize the value of the options. */
   const options = useMemo<MapOptions>(
