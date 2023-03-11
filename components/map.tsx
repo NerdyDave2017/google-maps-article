@@ -15,6 +15,7 @@ import GlobalVariableContext from "../context/GlobalVaribales";
 import Marker from "./Marker";
 import Overlay from "./Overlay/Overlay";
 import OverlayMarker from "./Overlay/OverlayMarker";
+import UserLocationOverlay from "./UserGeolocation/UserLocationOverlay";
 
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
@@ -164,6 +165,7 @@ const Map = () => {
       onLoad={onLoad}
       onDblClick={handleMapClick}
     >
+      <UserLocationOverlay position={mapCenter} />
       {/* Child components, such as markers, info windows, etc. */}
       {markers?.map((marker, index) => (
         <Marker

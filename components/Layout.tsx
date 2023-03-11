@@ -19,11 +19,11 @@ import GlobalVariableContext from "../context/GlobalVaribales";
 import useGetUserGeolocation from "../hooks/useUserGeolocation";
 
 const Layout = () => {
-  const { userLocation, locationLoading } = useGetUserGeolocation();
+  const { mapCenter, locationLoading } = useGetUserGeolocation();
 
   const { showBanner } = useContext(GlobalVariableContext);
 
-  useEffect(() => {}, [userLocation]);
+  useEffect(() => {}, [mapCenter]);
 
   /* This is a conditional rendering. If the location is loading, then show the spinner. */
   if (locationLoading) {
