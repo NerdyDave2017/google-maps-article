@@ -15,6 +15,7 @@ import GlobalVariableContext from "../context/GlobalVaribales";
 import Marker from "./Marker";
 import Overlay from "./Overlay/Overlay";
 import OverlayMarker from "./Overlay/OverlayMarker";
+import UserLocationOverlay from "./UserGeolocation/UserLocationOverlay";
 
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
@@ -27,6 +28,9 @@ type Libraries = (
   | "visualization"
 )[];
 
+/* Map libraries passed to the useLoaadScript hook. */
+const newLibraries: Libraries = ["places"];
+
 const Map = () => {
   // Component state to display overlay
   const [overlayPosition, setOverlayPosition] = useState<LatLngLiteral>({
@@ -35,7 +39,7 @@ const Map = () => {
   });
   const [showOverlay, setShowOverlay] = useState(false);
 
-  // import setMarkers function from global variable context
+  // import glonal states  from global variable context
   const {
     markers,
     setMarkers,
@@ -45,16 +49,16 @@ const Map = () => {
     overlayMarkers,
     setOverlayMarkers,
     markerType,
+    mapCenter,
+    mapInstance,
+    setMapInstance,
   } = useContext(GlobalVariableContext);
 
   /* Creating a reference to the map. */
   const mapRef = useRef<GoogleMap>();
 
   /* Hardcoded map center value. useMemo hook to memorize center values */
-  const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 53.344250668504806, lng: -6.261668903294844 }),
-    []
-  );
+  const center = useMemo<LatLngLiteral>(() => mapCenter, []);
 
   /* A React hook that is used to memoize the value of the options. */
   const options = useMemo<MapOptions>(
@@ -69,12 +73,13 @@ const Map = () => {
   /* A callback function that is called when the map is loaded. */
   const onLoad = useCallback(
     // eslint-disable-next-line
-    (map: any) => ((mapRef.current = map), console.log("map loaded")),
+    (map: any) => {
+      mapRef.current = map;
+      setMapInstance(map);
+      console.log("map loaded");
+    },
     []
   );
-
-  /* Map libraries passed to the useLoaadScript hook. */
-  let newLibraries: Libraries = ["places"];
 
   /* Loading the Google Maps API. */
   const { isLoaded } = useLoadScript({
@@ -166,6 +171,7 @@ const Map = () => {
       onLoad={onLoad}
       onDblClick={handleMapClick}
     >
+      <UserLocationOverlay position={mapCenter} />
       {/* Child components, such as markers, info windows, etc. */}
       {markers?.map((marker, index) => (
         <Marker
@@ -175,13 +181,11 @@ const Map = () => {
         />
       ))}
       {overlayMarkers?.map((marker, index) => (
-        <>
-          <OverlayMarker
-            position={marker.position}
-            key={index}
-            onClick={() => handleOverlayClick(marker.position)}
-          />
-        </>
+        <OverlayMarker
+          position={marker.position}
+          key={index}
+          onClick={() => handleOverlayClick(marker.position)}
+        />
       ))}
       {showOverlay && <Overlay position={overlayPosition} />}
       {/* <Overlay/> */}

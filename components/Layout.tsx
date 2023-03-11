@@ -16,8 +16,26 @@ import Banner from "./Banner";
 // import context
 import GlobalVariableContext from "../context/GlobalVaribales";
 
+import useGetUserGeolocation from "../hooks/useUserGeolocation";
+
 const Layout = () => {
+  const { mapCenter, locationLoading } = useGetUserGeolocation();
+
   const { showBanner } = useContext(GlobalVariableContext);
+
+  useEffect(() => {}, [mapCenter]);
+
+  /* This is a conditional rendering. If the location is loading, then show the spinner. */
+  if (locationLoading) {
+    return (
+      <div
+        style={{ width: "100vw", height: "100vh" }}
+        className="flex justify-center items-center bg-white"
+      >
+        <Spinner style={{ width: "3rem", height: "3rem" }} />
+      </div>
+    );
+  }
 
   // Conditionally render the map
   return (
