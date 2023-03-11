@@ -69,6 +69,7 @@ const Map = () => {
   const onLoad = useCallback(
     // eslint-disable-next-line
     (map: any) => ((mapRef.current = map), console.log("map loaded")),
+
     []
   );
 

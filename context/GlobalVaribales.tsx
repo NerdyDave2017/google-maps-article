@@ -18,6 +18,8 @@ interface GlobalVariableContext {
   setOverlayMarkers: (overlayMarkers: Array<IOverlayMarkers>) => void;
   mapCenter: google.maps.LatLngLiteral;
   setMapCenter: (userLocation: google.maps.LatLngLiteral) => void;
+  mapInstance: google.maps.Map | undefined;
+  setMapInstance: (mapInstance: google.maps.Map) => void;
 }
 
 // Type for the global variable provider
@@ -49,6 +51,7 @@ const GlobalVariableContext = createContext<GlobalVariableContext>(
 );
 
 export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
+  const [mapInstance, setMapInstance] = useState<google.maps.Map>();
   // Global loading state
   const [loading, setLoading] = useState(false);
   // Global Banner state
@@ -90,6 +93,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setOverlayMarkers,
         mapCenter,
         setMapCenter,
+        mapInstance,
+        setMapInstance,
       }}
     >
       {children}
