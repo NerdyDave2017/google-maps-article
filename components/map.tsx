@@ -28,6 +28,9 @@ type Libraries = (
   | "visualization"
 )[];
 
+/* Map libraries passed to the useLoaadScript hook. */
+const newLibraries: Libraries = ["places"];
+
 const Map = () => {
   // Component state to display overlay
   const [overlayPosition, setOverlayPosition] = useState<LatLngLiteral>({
@@ -36,7 +39,7 @@ const Map = () => {
   });
   const [showOverlay, setShowOverlay] = useState(false);
 
-  // import setMarkers function from global variable context
+  // import glonal states  from global variable context
   const {
     markers,
     setMarkers,
@@ -47,6 +50,8 @@ const Map = () => {
     setOverlayMarkers,
     markerType,
     mapCenter,
+    mapInstance,
+    setMapInstance,
   } = useContext(GlobalVariableContext);
 
   /* Creating a reference to the map. */
@@ -68,13 +73,13 @@ const Map = () => {
   /* A callback function that is called when the map is loaded. */
   const onLoad = useCallback(
     // eslint-disable-next-line
-    (map: any) => ((mapRef.current = map), console.log("map loaded")),
-
+    (map: any) => {
+      mapRef.current = map;
+      setMapInstance(map);
+      console.log("map loaded");
+    },
     []
   );
-
-  /* Map libraries passed to the useLoaadScript hook. */
-  let newLibraries: Libraries = ["places"];
 
   /* Loading the Google Maps API. */
   const { isLoaded } = useLoadScript({

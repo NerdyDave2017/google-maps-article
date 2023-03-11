@@ -26,7 +26,7 @@ const useGetUserGeolocation = () => {
           lat: crd.latitude,
           lng: crd.longitude,
         };
-        console.log(crd);
+        // console.log(crd);
         // console.log("Your current position is:" + crd.latitude + crd.longitude);
         // alert("Your current position is:" + crd.latitude  crd.longitude);
         // alert(
