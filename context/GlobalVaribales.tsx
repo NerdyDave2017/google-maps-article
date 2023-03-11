@@ -67,8 +67,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
 
   // User Location state
   const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral>({
-    lat: 0,
-    lng: 0,
+    lat: 53.344250668504806,
+    lng: -6.261668903294844,
   });
 
   return (
