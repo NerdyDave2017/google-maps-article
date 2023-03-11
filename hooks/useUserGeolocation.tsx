@@ -6,7 +6,7 @@ interface IGeolocation {
   longitude: number;
 }
 const useGetUserGeolocation = () => {
-  const { setUserLocation, userLocation } = useContext(GlobalVariableContext);
+  const { setMapCenter, mapCenter } = useContext(GlobalVariableContext);
   // const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral>({
   //   lat: 0,
   //   lng: 0,
@@ -32,7 +32,7 @@ const useGetUserGeolocation = () => {
         // alert(
         //   `Your current position is: latitude: ${crd.latitude}, longitude: ${crd.longitude}`
         // );
-        setUserLocation(Location);
+        setMapCenter(Location);
         setLocationLoading(false);
       }
       function error(error: any) {
@@ -51,7 +51,7 @@ const useGetUserGeolocation = () => {
     getUserLocation();
   }, []);
 
-  return { userLocation, locationLoading };
+  return { mapCenter, locationLoading };
 };
 
 export default useGetUserGeolocation;
