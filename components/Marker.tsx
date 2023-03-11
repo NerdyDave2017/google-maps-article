@@ -25,7 +25,13 @@ const customMarkersImage: ICustomMarkers = {
 };
 
 const marker: FC<IMarker> = ({ position, markerType }) => {
-  return <MarkerF position={position} icon={customMarkersImage[markerType]} />;
+  return (
+    <MarkerF
+      position={position}
+      icon={customMarkersImage[markerType]}
+      animation={google.maps.Animation.BOUNCE}
+    />
+  );
 };
 
 export default marker;

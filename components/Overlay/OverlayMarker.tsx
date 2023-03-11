@@ -12,6 +12,7 @@ const marker: FC<IMarker> = ({ position, onClick }) => {
       position={position}
       onClick={onClick}
       icon="https://res.cloudinary.com/nerdydave2017/image/upload/v1678466110/present-tag_1_cqdp9p.svg"
+      animation={google.maps.Animation.DROP}
     />
   );
 };
