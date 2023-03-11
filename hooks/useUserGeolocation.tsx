@@ -1,16 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import GlobalVariableContext from "../context/GlobalVaribales";
 
-interface IGeolocation {
-  latitude: number;
-  longitude: number;
-}
 const useGetUserGeolocation = () => {
   const { setMapCenter, mapCenter } = useContext(GlobalVariableContext);
-  // const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral>({
-  //   lat: 0,
-  //   lng: 0,
-  // });
+
   const [locationLoading, setLocationLoading] = useState(true);
 
   useEffect(() => {
@@ -26,12 +19,7 @@ const useGetUserGeolocation = () => {
           lat: crd.latitude,
           lng: crd.longitude,
         };
-        // console.log(crd);
-        // console.log("Your current position is:" + crd.latitude + crd.longitude);
-        // alert("Your current position is:" + crd.latitude  crd.longitude);
-        // alert(
-        //   `Your current position is: latitude: ${crd.latitude}, longitude: ${crd.longitude}`
-        // );
+
         setMapCenter(Location);
         setLocationLoading(false);
       }
