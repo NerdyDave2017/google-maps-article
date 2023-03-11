@@ -181,13 +181,11 @@ const Map = () => {
         />
       ))}
       {overlayMarkers?.map((marker, index) => (
-        <>
-          <OverlayMarker
-            position={marker.position}
-            key={index}
-            onClick={() => handleOverlayClick(marker.position)}
-          />
-        </>
+        <OverlayMarker
+          position={marker.position}
+          key={index}
+          onClick={() => handleOverlayClick(marker.position)}
+        />
       ))}
       {showOverlay && <Overlay position={overlayPosition} />}
       {/* <Overlay/> */}
