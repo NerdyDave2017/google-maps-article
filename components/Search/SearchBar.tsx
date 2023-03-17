@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { StandaloneSearchBox } from "@react-google-maps/api";
+
+import GlobalVariableContext from "../../context/GlobalVaribales";
 
 type SearchBarProps = {
   value?: string;
@@ -7,6 +10,13 @@ type SearchBarProps = {
 };
 
 const SearchBar = ({ value, onChange, style }: SearchBarProps) => {
+  /* Destructuring the mapInstance from the GlobalVariableContext. */
+  /* Destructuring the mapInstance from the GlobalVariableContext. */
+  const { mapInstance } = useContext(GlobalVariableContext);
+
+  // const onLoad = (ref) => (this.searchBox = ref);
+
+  // const onPlacesChanged = () => console.log(searchBox.getPlaces());
   return (
     <div
       className="w-96 h-12 lg:h-14 bg-purple-light"
@@ -18,6 +28,9 @@ const SearchBar = ({ value, onChange, style }: SearchBarProps) => {
         ...style,
       }}
     >
+      {/* <StandaloneSearchBox
+      // onLoad={onLoad} onPlacesChanged={onPlacesChanged}
+      > */}
       <input
         type="text"
         placeholder="Enter your location..."
@@ -29,6 +42,7 @@ const SearchBar = ({ value, onChange, style }: SearchBarProps) => {
         onChange={onChange}
         value={value}
       />
+      {/* </StandaloneSearchBox> */}
     </div>
   );
 };
