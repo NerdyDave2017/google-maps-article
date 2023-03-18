@@ -7,9 +7,10 @@ type SearchBarProps = {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   style?: React.CSSProperties;
+  setSearch?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SearchBar = ({ value, onChange, style }: SearchBarProps) => {
+const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
   /* Destructuring the mapInstance from the GlobalVariableContext. */
   /* Destructuring the mapInstance from the GlobalVariableContext. */
   const { mapInstance } = useContext(GlobalVariableContext);

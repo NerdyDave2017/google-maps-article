@@ -26,6 +26,7 @@ const Index = () => {
           }}
           onChange={(e) => setSearch(e.target.value)}
           value={search}
+          setSearch={setSearch}
         />
         {/* IconButton visible - opens and closes search bar and card onClick */}
         <IconButton
