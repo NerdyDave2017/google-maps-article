@@ -1,7 +1,4 @@
 import React, { useContext } from "react";
-import { StandaloneSearchBox } from "@react-google-maps/api";
-
-import GlobalVariableContext from "../../context/GlobalVaribales";
 
 type SearchBarProps = {
   value: string;
@@ -11,9 +8,11 @@ type SearchBarProps = {
 };
 
 const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
-  /* Destructuring the mapInstance from the GlobalVariableContext. */
-  const { mapInstance } = useContext(GlobalVariableContext);
-
+  /**
+   * We're using the Google Maps API to get a list of predictions based on the input value
+   * @param e - React.ChangeEvent<HTMLInputElement> - This is the event that is triggered when the
+   * input value changes.
+   */
   const onInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     // @ts-ignore
     setSearch(e.target.value);
