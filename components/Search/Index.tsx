@@ -24,7 +24,7 @@ const Index = () => {
           style={{
             width: visible ? "24rem" : "0rem",
           }}
-          onChange={(e) => setSearch(e.target.value)}
+          // onChange={(e) => setSearch(e.target.value)}
           value={search}
           setSearch={setSearch}
         />
@@ -42,7 +42,7 @@ const Index = () => {
         </IconButton>
       </div>
       {/* Conditional Rendering onClick search IconButton */}
-      {search.length >= 3 && <SearchCard />}
+      {search.length > 0 && <SearchCard />}
     </div>
   );
 };

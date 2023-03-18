@@ -4,7 +4,7 @@ import { StandaloneSearchBox } from "@react-google-maps/api";
 import GlobalVariableContext from "../../context/GlobalVaribales";
 
 type SearchBarProps = {
-  value?: string;
+  value: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   style?: React.CSSProperties;
   setSearch?: React.Dispatch<React.SetStateAction<string>>;
@@ -12,12 +12,31 @@ type SearchBarProps = {
 
 const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
   /* Destructuring the mapInstance from the GlobalVariableContext. */
-  /* Destructuring the mapInstance from the GlobalVariableContext. */
   const { mapInstance } = useContext(GlobalVariableContext);
 
-  // const onLoad = (ref) => (this.searchBox = ref);
+  const onInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // @ts-ignore
+    setSearch(e.target.value);
 
-  // const onPlacesChanged = () => console.log(searchBox.getPlaces());
+    // Initialize auto complete service class
+    const service = new google.maps.places.AutocompleteService();
+
+    // Call the service with the input value
+    service.getPlacePredictions(
+      {
+        input: value,
+      },
+      (predictions, status) => {
+        if (status !== google.maps.places.PlacesServiceStatus.OK) {
+          console.error(status);
+          return;
+        }
+
+        console.log(predictions);
+      }
+    );
+  };
+
   return (
     <div
       className="w-96 h-12 lg:h-14 bg-purple-light"
@@ -29,9 +48,6 @@ const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
         ...style,
       }}
     >
-      {/* <StandaloneSearchBox
-      // onLoad={onLoad} onPlacesChanged={onPlacesChanged}
-      > */}
       <input
         type="text"
         placeholder="Enter your location..."
@@ -40,10 +56,9 @@ const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
           borderTopLeftRadius: "1rem",
           borderBottomLeftRadius: "1rem",
         }}
-        onChange={onChange}
+        onChange={(e) => onInputChange(e)}
         value={value}
       />
-      {/* </StandaloneSearchBox> */}
     </div>
   );
 };
