@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import PlaceIcon from "@mui/icons-material/Place";
 
 import GlobalVariableContext from "../../context/GlobalVaribales";
+import { Description } from "@mui/icons-material";
+import { jsx } from "@emotion/react";
 
 type SearchCardProps = {
   style?: React.CSSProperties;
@@ -10,8 +12,19 @@ type SearchCardProps = {
 const SearchCard = ({ style }: SearchCardProps) => {
   const { autoCompleteResponse } = useContext(GlobalVariableContext);
 
-  const formatDescription = (description: string) => {
-    description.length;
+  const formatDescription = (description: string): JSX.Element => {
+    let initial = description.split(" ")[0];
+    let strSplit = description
+      .split(",")
+      .splice(1, description.length - 1)
+      .join();
+
+    return (
+      <>
+        <span className="font-bold">{initial}</span>
+        <span className="whitespace-pre-wrap">{strSplit}</span>
+      </>
+    );
   };
 
   return (
@@ -31,7 +44,7 @@ const SearchCard = ({ style }: SearchCardProps) => {
           <div className="">
             <PlaceIcon />
           </div>
-          <div className="">{response.description}</div>
+          <div className="">{formatDescription(response.description)}</div>
         </div>
       ))}
     </div>
