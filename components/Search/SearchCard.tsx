@@ -8,12 +8,14 @@ type SearchCardProps = {
 };
 
 const SearchCard = ({ style }: SearchCardProps) => {
-  const { autoCompleteResponse, markers, setMarkers, mapInstance } = useContext(
+  const { autoCompleteResponse, mapInstance } = useContext(
     GlobalVariableContext
   );
 
-  useEffect(() => {}, [markers, mapInstance]);
-
+  /**
+   *
+   * @todo - Add a marker to the map on location search click
+   */
   const panToLocation = async (
     response: google.maps.places.AutocompletePrediction
   ) => {
@@ -45,8 +47,6 @@ const SearchCard = ({ style }: SearchCardProps) => {
           };
 
           mapInstance?.panTo(position);
-
-          // mapInstance?.setCenter(position);
         }
       }
     );
