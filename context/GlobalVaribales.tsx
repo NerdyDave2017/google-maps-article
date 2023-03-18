@@ -20,6 +20,10 @@ interface GlobalVariableContext {
   setMapCenter: (userLocation: google.maps.LatLngLiteral) => void;
   mapInstance: google.maps.Map | undefined;
   setMapInstance: (mapInstance: google.maps.Map) => void;
+  autoCompleteResponse: google.maps.places.AutocompletePrediction[] | null;
+  setAutoCompleteResponse: (
+    autoCompleteResponse: google.maps.places.AutocompletePrediction[] | null
+  ) => void;
 }
 
 // Type for the global variable provider
@@ -74,6 +78,11 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
     lng: -6.261668903294844,
   });
 
+  // AutoComplete prediction service
+  const [autoCompleteResponse, setAutoCompleteResponse] = useState<
+    google.maps.places.AutocompletePrediction[] | null
+  >([]);
+
   return (
     <GlobalVariableContext.Provider
       value={{
@@ -95,6 +104,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setMapCenter,
         mapInstance,
         setMapInstance,
+        autoCompleteResponse,
+        setAutoCompleteResponse,
       }}
     >
       {children}

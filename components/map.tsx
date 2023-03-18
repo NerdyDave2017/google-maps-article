@@ -54,6 +54,8 @@ const Map = () => {
     setMapInstance,
   } = useContext(GlobalVariableContext);
 
+  useEffect(() => {}, [markers, overlayMarkers, mapInstance, mapCenter]);
+
   /* Creating a reference to the map. */
   const mapRef = useRef<GoogleMap>();
 

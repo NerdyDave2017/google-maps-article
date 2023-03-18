@@ -1,25 +1,52 @@
 import React, { useContext } from "react";
-import { StandaloneSearchBox } from "@react-google-maps/api";
-
 import GlobalVariableContext from "../../context/GlobalVaribales";
 
 type SearchBarProps = {
-  value?: string;
+  value: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   style?: React.CSSProperties;
+  setSearch?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SearchBar = ({ value, onChange, style }: SearchBarProps) => {
-  /* Destructuring the mapInstance from the GlobalVariableContext. */
-  /* Destructuring the mapInstance from the GlobalVariableContext. */
-  const { mapInstance } = useContext(GlobalVariableContext);
+const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
+  /* It's destructuring the `autoCompleteResponse` and `setAutoCompleteResponse` from the
+  `GlobalVariableContext` */
+  const { autoCompleteResponse, setAutoCompleteResponse, mapCenter } =
+    useContext(GlobalVariableContext);
 
-  // const onLoad = (ref) => (this.searchBox = ref);
+  /**
+   * We're using the Google Maps API to get a list of predictions based on the input value
+   * @param e - React.ChangeEvent<HTMLInputElement> - This is the event that is triggered when the
+   * input value changes.
+   */
+  const onInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // @ts-ignore
+    setSearch(e.target.value);
 
-  // const onPlacesChanged = () => console.log(searchBox.getPlaces());
+    // Initialize auto complete service class
+    const service = new google.maps.places.AutocompleteService();
+
+    // Call the service with the input value
+    service.getPlacePredictions(
+      {
+        input: value,
+        // location: new google.maps.LatLng(mapCenter), // Initialize new LatLng class by passing the map center/user location for search bias
+      },
+      (predictions, status) => {
+        if (status !== google.maps.places.PlacesServiceStatus.OK) {
+          console.error(status);
+          return;
+        }
+        /* It's setting the `autoCompleteResponse` state to the `predictions` array. */
+        setAutoCompleteResponse(predictions);
+        console.log(predictions);
+      }
+    );
+  };
+
   return (
     <div
-      className="w-96 h-12 lg:h-14 bg-purple-light"
+      className="w-full h-12 lg:h-14 bg-purple-light"
       style={{
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
         borderTopLeftRadius: "1rem",
@@ -28,9 +55,6 @@ const SearchBar = ({ value, onChange, style }: SearchBarProps) => {
         ...style,
       }}
     >
-      {/* <StandaloneSearchBox
-      // onLoad={onLoad} onPlacesChanged={onPlacesChanged}
-      > */}
       <input
         type="text"
         placeholder="Enter your location..."
@@ -39,10 +63,9 @@ const SearchBar = ({ value, onChange, style }: SearchBarProps) => {
           borderTopLeftRadius: "1rem",
           borderBottomLeftRadius: "1rem",
         }}
-        onChange={onChange}
+        onChange={(e) => onInputChange(e)}
         value={value}
       />
-      {/* </StandaloneSearchBox> */}
     </div>
   );
 };
