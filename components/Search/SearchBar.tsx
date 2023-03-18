@@ -3,16 +3,14 @@ import GlobalVariableContext from "../../context/GlobalVaribales";
 
 type SearchBarProps = {
   value: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   style?: React.CSSProperties;
   setSearch?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
+const SearchBar = ({ value, style, setSearch }: SearchBarProps) => {
   /* It's destructuring the `autoCompleteResponse` and `setAutoCompleteResponse` from the
   `GlobalVariableContext` */
-  const { autoCompleteResponse, setAutoCompleteResponse, mapCenter } =
-    useContext(GlobalVariableContext);
+  const { setAutoCompleteResponse } = useContext(GlobalVariableContext);
 
   /**
    * We're using the Google Maps API to get a list of predictions based on the input value
@@ -39,7 +37,6 @@ const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
         }
         /* It's setting the `autoCompleteResponse` state to the `predictions` array. */
         setAutoCompleteResponse(predictions);
-        console.log(predictions);
       }
     );
   };
