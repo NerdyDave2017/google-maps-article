@@ -46,7 +46,7 @@ const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
 
   return (
     <div
-      className="w-96 h-12 lg:h-14 bg-purple-light"
+      className="w-full h-12 lg:h-14 bg-purple-light"
       style={{
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
         borderTopLeftRadius: "1rem",

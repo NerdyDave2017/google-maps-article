@@ -22,7 +22,7 @@ const Index = () => {
         {/* Conditional Rendering onClick search IconButton */}
         <SearchBar
           style={{
-            width: visible ? "24rem" : "0rem",
+            width: visible ? "100%" : "0rem",
           }}
           // onChange={(e) => setSearch(e.target.value)}
           value={search}
