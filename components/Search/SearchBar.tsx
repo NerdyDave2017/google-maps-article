@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import GlobalVariableContext from "../../context/GlobalVaribales";
 
 type SearchBarProps = {
   value: string;
@@ -8,6 +9,12 @@ type SearchBarProps = {
 };
 
 const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
+  /* It's destructuring the `autoCompleteResponse` and `setAutoCompleteResponse` from the
+  `GlobalVariableContext` */
+  const { autoCompleteResponse, setAutoCompleteResponse } = useContext(
+    GlobalVariableContext
+  );
+
   /**
    * We're using the Google Maps API to get a list of predictions based on the input value
    * @param e - React.ChangeEvent<HTMLInputElement> - This is the event that is triggered when the
@@ -30,7 +37,8 @@ const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
           console.error(status);
           return;
         }
-
+        /* It's setting the `autoCompleteResponse` state to the `predictions` array. */
+        setAutoCompleteResponse(predictions);
         console.log(predictions);
       }
     );
