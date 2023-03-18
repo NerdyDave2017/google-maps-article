@@ -11,9 +11,8 @@ type SearchBarProps = {
 const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
   /* It's destructuring the `autoCompleteResponse` and `setAutoCompleteResponse` from the
   `GlobalVariableContext` */
-  const { autoCompleteResponse, setAutoCompleteResponse } = useContext(
-    GlobalVariableContext
-  );
+  const { autoCompleteResponse, setAutoCompleteResponse, mapCenter } =
+    useContext(GlobalVariableContext);
 
   /**
    * We're using the Google Maps API to get a list of predictions based on the input value
@@ -31,6 +30,7 @@ const SearchBar = ({ value, onChange, style, setSearch }: SearchBarProps) => {
     service.getPlacePredictions(
       {
         input: value,
+        // location: new google.maps.LatLng(mapCenter), // Initialize new LatLng class by passing the map center/user location for search bias
       },
       (predictions, status) => {
         if (status !== google.maps.places.PlacesServiceStatus.OK) {

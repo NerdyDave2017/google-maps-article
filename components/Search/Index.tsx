@@ -24,7 +24,6 @@ const Index = () => {
           style={{
             width: visible ? "100%" : "0rem",
           }}
-          // onChange={(e) => setSearch(e.target.value)}
           value={search}
           setSearch={setSearch}
         />
