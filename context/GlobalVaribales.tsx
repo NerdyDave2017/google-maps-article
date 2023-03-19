@@ -24,6 +24,14 @@ interface GlobalVariableContext {
   setAutoCompleteResponse: (
     autoCompleteResponse: google.maps.places.AutocompletePrediction[] | null
   ) => void;
+  pointA: google.maps.LatLngLiteral | undefined;
+  setPointA: (pointA: google.maps.LatLngLiteral) => void;
+  pointB: google.maps.LatLngLiteral | undefined;
+  setPointB: (pointB: google.maps.LatLngLiteral) => void;
+  pointAMarker: boolean;
+  setPointAMarker: (pointAMarker: boolean) => void;
+  pointBMarker: boolean;
+  setPointBMarker: (pointBMarker: boolean) => void;
 }
 
 // Type for the global variable provider
@@ -57,14 +65,14 @@ const GlobalVariableContext = createContext<GlobalVariableContext>(
 export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   const [mapInstance, setMapInstance] = useState<google.maps.Map>();
   // Global loading state
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   // Global Banner state
-  const [showBanner, setShowBanner] = useState(false);
+  const [showBanner, setShowBanner] = useState<boolean>(false);
   const [bannerMessage, setBannerMessage] = useState("");
 
   // Global Marker state
   const [markers, setMarkers] = useState<Array<IMarker>>([]);
-  const [addMarker, setAddMarker] = useState(false);
+  const [addMarker, setAddMarker] = useState<boolean>(false);
   const [markerType, setMarkerType] = useState<IMarkerType>("Default");
 
   // Overlay Marker state
@@ -82,6 +90,12 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   const [autoCompleteResponse, setAutoCompleteResponse] = useState<
     google.maps.places.AutocompletePrediction[] | null
   >([]);
+
+  // Distance between two points
+  const [pointA, setPointA] = useState<google.maps.LatLngLiteral>();
+  const [pointB, setPointB] = useState<google.maps.LatLngLiteral>();
+  const [pointAMarker, setPointAMarker] = useState<boolean>(false);
+  const [pointBMarker, setPointBMarker] = useState<boolean>(false);
 
   return (
     <GlobalVariableContext.Provider
@@ -106,6 +120,14 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setMapInstance,
         autoCompleteResponse,
         setAutoCompleteResponse,
+        pointA,
+        setPointA,
+        pointB,
+        setPointB,
+        pointAMarker,
+        setPointAMarker,
+        pointBMarker,
+        setPointBMarker,
       }}
     >
       {children}
