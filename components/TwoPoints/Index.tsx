@@ -1,11 +1,13 @@
-import React, { use, useContext } from "react";
+import React, { useContext } from "react";
 import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
 import GlobalVariableContext from "../../context/GlobalVaribales";
 
 import IconButton from "../IconButton";
 
 const Index = () => {
-  const { setShowBanner, setBannerMessage } = useContext(GlobalVariableContext);
+  const { setShowBanner, setBannerMessage, setPointAMarker } = useContext(
+    GlobalVariableContext
+  );
 
   // Function should prompt user to select two points on the map
   // Function should add a marker to the map at each point
@@ -15,14 +17,15 @@ const Index = () => {
     // Show banner
     setShowBanner(true);
     // Add custom banner message
-    setBannerMessage("Double click map to add points");
+    setBannerMessage("Click map to add points");
     // set add marker value to true to allow adding new marker
+    setPointAMarker(true);
     // set marker type
     // Close marker drawer on click
   };
 
   return (
-    <div>
+    <div onClick={addTwoPoints}>
       <IconButton>
         <TransferWithinAStationIcon className="w-6 h-6 lg:w-7 lg:h-7" />
       </IconButton>
