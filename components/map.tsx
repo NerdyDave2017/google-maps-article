@@ -123,6 +123,10 @@ const Map = () => {
       setAddPoint(false);
       setShowBanner(false);
     }
+    // Clear distance markers array for new points
+    if (distanceMarkers.length == 2) {
+      setDistanceMarkers([]);
+    }
     // update global distance marker state
     setDistanceMarkers([...distanceMarkers, newMarker]);
   };
