@@ -5,14 +5,24 @@ import GlobalVariableContext from "../../context/GlobalVaribales";
 import IconButton from "../IconButton";
 
 const Index = () => {
-  const { setShowBanner, setBannerMessage, setAddPoint, setMarkerType } =
-    useContext(GlobalVariableContext);
+  const {
+    setShowBanner,
+    setBannerMessage,
+    setAddPoint,
+    setMarkerType,
+    distanceMarkers,
+    setDistanceMarkers,
+  } = useContext(GlobalVariableContext);
 
   // Function should prompt user to select two points on the map
   // Function should add a marker to the map at each point
   // Then calculate the distance between the two points
   // Then add the distance to the global state
   const addTwoPoints = () => {
+    // Clear distance markers array for new points
+    if (distanceMarkers.length == 2) {
+      setDistanceMarkers([]);
+    }
     // Show banner
     setShowBanner(true);
     // Add custom banner message

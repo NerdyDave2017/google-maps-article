@@ -59,7 +59,13 @@ const Map = () => {
     setAddPoint,
   } = useContext(GlobalVariableContext);
 
-  useEffect(() => {}, [markers, overlayMarkers, mapInstance, mapCenter]);
+  useEffect(() => {}, [
+    markers,
+    overlayMarkers,
+    mapInstance,
+    mapCenter,
+    distanceMarkers,
+  ]);
 
   /* Creating a reference to the map. */
   const mapRef = useRef<GoogleMap>();
@@ -123,10 +129,7 @@ const Map = () => {
       setAddPoint(false);
       setShowBanner(false);
     }
-    // Clear distance markers array for new points
-    if (distanceMarkers.length == 2) {
-      setDistanceMarkers([]);
-    }
+
     // update global distance marker state
     setDistanceMarkers([...distanceMarkers, newMarker]);
   };
