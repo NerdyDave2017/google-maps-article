@@ -1,12 +1,12 @@
 import React, { FC, useContext } from "react";
 import { Marker as MarkerF } from "@react-google-maps/api";
 
-interface IMarker {
+interface MarkerProps {
   position: google.maps.LatLngLiteral;
   onClick?: () => void;
 }
 
-const marker: FC<IMarker> = ({ position, onClick }) => {
+const marker: FC<MarkerProps> = ({ position, onClick }) => {
   return (
     <MarkerF
       position={position}
