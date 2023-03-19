@@ -24,8 +24,10 @@ interface GlobalVariableContext {
   setAutoCompleteResponse: (
     autoCompleteResponse: google.maps.places.AutocompletePrediction[] | null
   ) => void;
-  distanceMarkers: IMarker[];
-  setDistanceMarkers: (distanceMarker: IMarker[]) => void;
+  distanceMarkers: Array<IMarker>;
+  setDistanceMarkers: (distanceMarkers: Array<IMarker>) => void;
+  addPoint: boolean;
+  setAddPoint: (addPoint: boolean) => void;
 }
 
 // Type for the global variable provider
@@ -87,6 +89,7 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
 
   // Distance between two points
   const [distanceMarkers, setDistanceMarkers] = useState<IMarker[]>([]);
+  const [addPoint, setAddPoint] = useState<boolean>(false);
 
   return (
     <GlobalVariableContext.Provider
@@ -113,6 +116,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setAutoCompleteResponse,
         distanceMarkers,
         setDistanceMarkers,
+        addPoint,
+        setAddPoint,
       }}
     >
       {children}

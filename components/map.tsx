@@ -52,6 +52,10 @@ const Map = () => {
     mapCenter,
     mapInstance,
     setMapInstance,
+    distanceMarkers,
+    setDistanceMarkers,
+    addPoint,
+    setAddPoint,
   } = useContext(GlobalVariableContext);
 
   useEffect(() => {}, [markers, overlayMarkers, mapInstance, mapCenter]);
@@ -95,13 +99,41 @@ const Map = () => {
     height: "100vh",
   };
 
-  // Function to add default marker
-  const handleMapClick = (e: any) => {
+  // Function to handle map click
+  const handleMapClick = async (e: google.maps.MapMouseEvent) => {
+    // Check if adding a point is enabled
+    if (!addPoint) return;
+
+    // get clicked point location value
+    //@ts-ignore
+    const latLng: google.maps.LatLng = e.latLng;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+
+    const newMarker = {
+      position: { lat, lng },
+      markerType: "Default",
+    };
+
+    // Check if distance marker lenght equals 1
+    // set addPoint to false
+    // set show banner false
+    if (distanceMarkers.length === 1) {
+      setAddMarker(false);
+      setShowBanner(false);
+    }
+    // update global distance marker state
+    setDistanceMarkers([...distanceMarkers, newMarker]);
+  };
+
+  // Function to handle map double click
+  const handleMapDoubleClick = (e: google.maps.MapMouseEvent) => {
     // Check if adding a new marker is enabled
     if (!addMarker) return;
 
-    // let clicked point location value
-    const latLng: any = e.latLng;
+    // get clicked point location value
+    //@ts-ignore
+    const latLng: google.maps.LatLng = e.latLng;
     const lat = latLng.lat();
     const lng = latLng.lng();
     // Check if marker type is overlay
@@ -171,7 +203,7 @@ const Map = () => {
       mapContainerStyle={mapContainerStyle}
       options={options}
       onLoad={onLoad}
-      onDblClick={handleMapClick}
+      onDblClick={handleMapDoubleClick}
     >
       <UserLocationOverlay position={mapCenter} />
       {/* Child components, such as markers, info windows, etc. */}
