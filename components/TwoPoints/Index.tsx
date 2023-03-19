@@ -16,7 +16,7 @@ const Index = () => {
     // Show banner
     setShowBanner(true);
     // Add custom banner message
-    setBannerMessage("Click map to add points");
+    setBannerMessage("Click map to add two points");
     // set add point value to true to allow adding new point
     setAddPoint(true);
     // set marker type to default
