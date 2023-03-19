@@ -24,14 +24,8 @@ interface GlobalVariableContext {
   setAutoCompleteResponse: (
     autoCompleteResponse: google.maps.places.AutocompletePrediction[] | null
   ) => void;
-  pointA: google.maps.LatLngLiteral | undefined;
-  setPointA: (pointA: google.maps.LatLngLiteral) => void;
-  pointB: google.maps.LatLngLiteral | undefined;
-  setPointB: (pointB: google.maps.LatLngLiteral) => void;
-  pointAMarker: boolean;
-  setPointAMarker: (pointAMarker: boolean) => void;
-  pointBMarker: boolean;
-  setPointBMarker: (pointBMarker: boolean) => void;
+  distanceMarkers: IMarker[];
+  setDistanceMarkers: (distanceMarker: IMarker[]) => void;
 }
 
 // Type for the global variable provider
@@ -92,10 +86,7 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   >([]);
 
   // Distance between two points
-  const [pointA, setPointA] = useState<google.maps.LatLngLiteral>();
-  const [pointB, setPointB] = useState<google.maps.LatLngLiteral>();
-  const [pointAMarker, setPointAMarker] = useState<boolean>(false);
-  const [pointBMarker, setPointBMarker] = useState<boolean>(false);
+  const [distanceMarkers, setDistanceMarkers] = useState<IMarker[]>([]);
 
   return (
     <GlobalVariableContext.Provider
@@ -120,14 +111,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setMapInstance,
         autoCompleteResponse,
         setAutoCompleteResponse,
-        pointA,
-        setPointA,
-        pointB,
-        setPointB,
-        pointAMarker,
-        setPointAMarker,
-        pointBMarker,
-        setPointBMarker,
+        distanceMarkers,
+        setDistanceMarkers,
       }}
     >
       {children}

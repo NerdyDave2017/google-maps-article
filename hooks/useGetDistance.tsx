@@ -7,7 +7,7 @@ const useGetDistance = () => {
 
   const [distance, setDistance] = useState(0);
 
-  const getPositions = (point1: LatLng, point2: LatLng) => {};
+  const getPositions = (point: LatLng) => {};
 };
 
 export default useGetDistance;
