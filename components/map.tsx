@@ -102,7 +102,9 @@ const Map = () => {
   // Function to handle map click
   const handleMapClick = async (e: google.maps.MapMouseEvent) => {
     // Check if adding a point is enabled
+    console.log("onClick");
     if (!addPoint) return;
+    console.log("onClick1");
 
     // get clicked point location value
     //@ts-ignore
@@ -112,7 +114,7 @@ const Map = () => {
 
     const newMarker = {
       position: { lat, lng },
-      markerType: "Default",
+      markerType: markerType,
     };
 
     // Check if distance marker lenght equals 1
@@ -203,6 +205,7 @@ const Map = () => {
       mapContainerStyle={mapContainerStyle}
       options={options}
       onLoad={onLoad}
+      onClick={handleMapClick}
       onDblClick={handleMapDoubleClick}
     >
       <UserLocationOverlay position={mapCenter} />
@@ -222,7 +225,13 @@ const Map = () => {
         />
       ))}
       {showOverlay && <Overlay position={overlayPosition} />}
-      {/* <Overlay/> */}
+      {distanceMarkers.map((marker, index) => (
+        <Marker
+          position={marker.position}
+          key={index}
+          markerType={marker.markerType}
+        />
+      ))}
     </GoogleMap>
   );
 };

@@ -5,9 +5,8 @@ import GlobalVariableContext from "../../context/GlobalVaribales";
 import IconButton from "../IconButton";
 
 const Index = () => {
-  const { setShowBanner, setBannerMessage, setAddPoint } = useContext(
-    GlobalVariableContext
-  );
+  const { setShowBanner, setBannerMessage, setAddPoint, setMarkerType } =
+    useContext(GlobalVariableContext);
 
   // Function should prompt user to select two points on the map
   // Function should add a marker to the map at each point
@@ -20,6 +19,8 @@ const Index = () => {
     setBannerMessage("Click map to add points");
     // set add point value to true to allow adding new point
     setAddPoint(true);
+    // set marker type to default
+    setMarkerType("Default");
   };
 
   return (
