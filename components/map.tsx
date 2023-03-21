@@ -16,6 +16,7 @@ import Marker from "./Marker";
 import Overlay from "./Overlay/Overlay";
 import OverlayMarker from "./Overlay/OverlayMarker";
 import UserLocationOverlay from "./UserGeolocation/UserLocationOverlay";
+import PolylineComponent from "./Polyline";
 
 // Map Types
 type LatLngLiteral = google.maps.LatLngLiteral;
@@ -58,7 +59,13 @@ const Map = () => {
     setAddPoint,
   } = useContext(GlobalVariableContext);
 
-  useEffect(() => {}, [markers, overlayMarkers, mapInstance, mapCenter]);
+  useEffect(() => {}, [
+    markers,
+    overlayMarkers,
+    mapInstance,
+    mapCenter,
+    distanceMarkers,
+  ]);
 
   /* Creating a reference to the map. */
   const mapRef = useRef<GoogleMap>();
@@ -102,9 +109,7 @@ const Map = () => {
   // Function to handle map click
   const handleMapClick = async (e: google.maps.MapMouseEvent) => {
     // Check if adding a point is enabled
-    console.log("onClick");
     if (!addPoint) return;
-    console.log("onClick1");
 
     // get clicked point location value
     //@ts-ignore
@@ -121,9 +126,10 @@ const Map = () => {
     // set addPoint to false
     // set show banner false
     if (distanceMarkers.length === 1) {
-      setAddMarker(false);
+      setAddPoint(false);
       setShowBanner(false);
     }
+
     // update global distance marker state
     setDistanceMarkers([...distanceMarkers, newMarker]);
   };
@@ -197,6 +203,12 @@ const Map = () => {
     );
   }
 
+  const getPolylinePath = () => {
+    return distanceMarkers.length == 2
+      ? [distanceMarkers[0].position, distanceMarkers[1].position]
+      : [];
+  };
+
   return (
     /* Creating a Google Map. */
     <GoogleMap
@@ -232,6 +244,9 @@ const Map = () => {
           markerType={marker.markerType}
         />
       ))}
+      {distanceMarkers.length == 2 && (
+        <PolylineComponent pathDetails={getPolylinePath()} />
+      )}
     </GoogleMap>
   );
 };
