@@ -57,6 +57,8 @@ const Map = () => {
     setDistanceMarkers,
     addPoint,
     setAddPoint,
+    showPolyline,
+    setShowPolyline,
   } = useContext(GlobalVariableContext);
 
   useEffect(() => {}, [
@@ -108,6 +110,7 @@ const Map = () => {
 
   // Function to handle map click
   const handleMapClick = async (e: google.maps.MapMouseEvent) => {
+    console.log("polyline 2", showPolyline);
     // Check if adding a point is enabled
     if (!addPoint) return;
 
@@ -126,6 +129,7 @@ const Map = () => {
     // set addPoint to false
     // set show banner false
     if (distanceMarkers.length === 1) {
+      setShowPolyline(true);
       setAddPoint(false);
       setShowBanner(false);
     }
@@ -185,7 +189,7 @@ const Map = () => {
       // If same, set show overlay to false
       setShowOverlay(false);
       // If same, set overlay position to 0,0
-      setOverlayPosition({ lat: 0, lng: 0 });
+      // setOverlayPosition({ lat: 0, lng: 0 });
       return;
     }
     setOverlayPosition(position);
@@ -202,12 +206,6 @@ const Map = () => {
       </div>
     );
   }
-
-  const getPolylinePath = () => {
-    return distanceMarkers.length == 2
-      ? [distanceMarkers[0].position, distanceMarkers[1].position]
-      : [];
-  };
 
   return (
     /* Creating a Google Map. */
@@ -244,9 +242,7 @@ const Map = () => {
           markerType={marker.markerType}
         />
       ))}
-      {distanceMarkers.length == 2 && (
-        <PolylineComponent pathDetails={getPolylinePath()} />
-      )}
+      {/* {showPolyline && <PolylineComponent />} */}
     </GoogleMap>
   );
 };

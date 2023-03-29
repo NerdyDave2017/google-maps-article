@@ -12,6 +12,8 @@ const Index = () => {
     setMarkerType,
     distanceMarkers,
     setDistanceMarkers,
+    showPolyline,
+    setShowPolyline,
   } = useContext(GlobalVariableContext);
 
   // Function should prompt user to select two points on the map
@@ -19,10 +21,13 @@ const Index = () => {
   // Then calculate the distance between the two points
   // Then add the distance to the global state
   const addTwoPoints = () => {
+    console.log("polylinw", showPolyline);
     // Clear distance markers array for new points
-    if (distanceMarkers.length == 2) {
-      setDistanceMarkers([]);
-    }
+    // if (distanceMarkers.length == 2) {
+    console.log("clear polyline also");
+    setShowPolyline(false);
+    setDistanceMarkers([]);
+    // }
     // Show banner
     setShowBanner(true);
     // Add custom banner message
