@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Polyline } from "@react-google-maps/api";
+import GlobalVariableContext from "../context/GlobalVaribales";
 
-interface PolylineProps {
-  pathDetails: google.maps.LatLngLiteral[];
-}
+const PolylineComponent = () => {
+  const { distanceMarkers } = useContext(GlobalVariableContext);
+  useEffect(() => {}, [distanceMarkers]);
 
-const PolylineComponent = ({ pathDetails }: PolylineProps) => {
-  const path = [...pathDetails];
+  let path =
+    distanceMarkers.length < 2
+      ? []
+      : [distanceMarkers[0]?.position, distanceMarkers[1]?.position];
   const options = {
     strokeColor: "#FF0000",
     strokeOpacity: 0.8,

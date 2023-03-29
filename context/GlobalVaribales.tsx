@@ -28,6 +28,8 @@ interface GlobalVariableContext {
   setDistanceMarkers: (distanceMarkers: Array<IMarker>) => void;
   addPoint: boolean;
   setAddPoint: (addPoint: boolean) => void;
+  showPolyline: boolean;
+  setShowPolyline: (showPolyline: boolean) => void;
 }
 
 // Type for the global variable provider
@@ -90,6 +92,7 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
   // Distance between two points
   const [distanceMarkers, setDistanceMarkers] = useState<IMarker[]>([]);
   const [addPoint, setAddPoint] = useState<boolean>(false);
+  const [showPolyline, setShowPolyline] = useState<boolean>(false);
 
   return (
     <GlobalVariableContext.Provider
@@ -118,6 +121,8 @@ export const GlobalVariableProvider = ({ children }: GlobalVariableProp) => {
         setDistanceMarkers,
         addPoint,
         setAddPoint,
+        showPolyline,
+        setShowPolyline,
       }}
     >
       {children}
